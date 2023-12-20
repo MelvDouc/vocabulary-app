@@ -1,0 +1,13 @@
+{% extends "__base.twig" %}
+
+{% block title %}{{ language }}{% endblock %}
+
+{% block contents %}
+<ul class="word-list">
+  {% for word in words %}
+    <li>
+      <a href="/word?id={{ word.id }}">{{ word.entry }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

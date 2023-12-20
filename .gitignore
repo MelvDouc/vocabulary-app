@@ -1,0 +1,9 @@
+.vscode
+data
+node_modules
+server/dist
+static/bundle
+
+.env
+*.local
+*.local.*

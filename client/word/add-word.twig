@@ -1,0 +1,16 @@
+{% extends "__base.twig" %}
+
+{% block title %}Add a word{% endblock %}
+
+{% block contents %}
+<form class="form" is="word-form" data-method="POST">
+  <article class="form-group">
+    <label for="word_yaml">Word</label>
+    <textarea name="word_yaml" id="word_yaml" is="yaml-textarea">{{ wordYaml }}</textarea>
+  </article>
+  <article class="form-submit">
+    <button class="btn" type="submit">Add</button>
+    <a class="btn btn-danger" href="/">Cancel</a>
+  </article>
+</form>
+{% endblock %}

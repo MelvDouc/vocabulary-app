@@ -1,0 +1,15 @@
+{% extends "__base.twig" %}
+
+{% block title %}{{ entry }}{% endblock %}
+
+{% block contents %}
+<div class="word-card">
+  <h2>{{ entry }}</h2>
+  <h3>{{ wordClass }}</h3>
+  <pre>{{ word }}</pre>
+  <div class="controls">
+    <a class="btn" href="/word/update?id={{ id }}">Update</a>
+    <button class="btn btn-danger" is="delete-word-btn" data-id="{{ id }}">Delete</button>
+  </div>
+</div>
+{% endblock %}

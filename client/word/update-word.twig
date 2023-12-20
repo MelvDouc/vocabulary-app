@@ -1,0 +1,16 @@
+{% extends "__base.twig" %}
+
+{% block title %}Update a word{% endblock %}
+
+{% block contents %}
+<form class="form" is="word-form" data-method="PATCH">
+  <article class="form-group">
+    <label for="word_yaml">Word</label>
+    <textarea name="word_yaml" id="word_yaml" is="yaml-textarea">{{ wordYaml }}</textarea>
+  </article>
+  <article class="form-submit">
+    <button class="btn" type="submit">Update</button>
+    <a class="btn btn-danger" href="/word?id={{ id }}">Cancel</a>
+  </article>
+</form>
+{% endblock %}

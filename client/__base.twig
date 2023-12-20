@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="/bundle/main.css" />
+  <script type="module" src="/bundle/main.js"></script>
+  <title>{% block title %}{% endblock %} | Voc App</title>
+</head>
+<body>
+  <nav>
+    {% if user is defined %}
+    <section class="nav-left">
+      <a href="/">Home</a>
+      <a href="/word/add">Add a word</a>
+      {% if language is defined %}
+      <a href="/words/{{ language }}/random-word">Random word</a>
+      {% endif %}
+    </section>
+    <section class="nav-right">
+      <button is="log-out-btn" title="Log out">{{ user.email }}</button>
+    </section>
+    {% endif %}
+  </nav>
+  <main>
+  {% block contents %}{% endblock %}
+  </main>
+</body>
+</html>

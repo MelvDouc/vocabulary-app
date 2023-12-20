@@ -1,0 +1,20 @@
+main {
+  padding: 1em;
+  overflow-y: auto;
+
+  ul {
+    list-style-position: inside;
+  }
+
+  @media only screen and (width >=400px) {
+    .word-list {
+      columns: 2;
+    }
+  }
+
+  @media only screen and (width >=650px) {
+    .word-list {
+      columns: 3;
+    }
+  }
+}

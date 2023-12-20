@@ -1,0 +1,11 @@
+{% extends "__base.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block contents %}
+<ul>
+  {% for language in languages %}
+  <li><a href="/words/{{ language }}">{{ language }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
