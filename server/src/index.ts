@@ -1,17 +1,13 @@
-import { Application } from "$server/deps.js";
-import ApiController from "$server/controllers/ApiController.js";
-import MiddlewareController from "$server/controllers/MiddlewareController.js";
-import ViewsController from "$server/controllers/ViewsController.js";
+import { serve } from "@hono/node-server";
+import app from "$server/core/app.js";
 
-const port = Number(process.env.PORT) || 8000;
-const app = new Application({ debug: true });
-
-app.setControllers([
-  MiddlewareController,
-  ApiController,
-  ViewsController,
-]);
-
-app.listen(port, () => {
-  console.log(`App running on http://melvin-doucet.local:${port}...`);
-});
+serve(
+  {
+    port: Number(process.env.PORT ?? process.env.Port ?? process.env.port) || 8000,
+    fetch: app.fetch
+  },
+  (info) => {
+    const hostname = info.address === "::" ? "http://localhost" : info.address;
+    console.log(`App running on ${hostname}:${info.port}...`);
+  }
+);

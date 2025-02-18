@@ -1,0 +1,9 @@
+.WordList {
+  @media only screen and (width >=400px) {
+    columns: 2;
+  }
+
+  @media only screen and (width >=650px) {
+    columns: 3;
+  }
+}

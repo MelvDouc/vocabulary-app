@@ -1,9 +1,17 @@
 // ===== ===== ===== ===== =====
+// JSON
+// ===== ===== ===== ===== =====
+
+type JsonArray = JsonValue[];
+type JsonDict = { [key: string]: JsonValue; };
+type JsonValue = string | number | boolean | null | JsonArray | JsonDict;
+
+// ===== ===== ===== ===== =====
 // API
 // ===== ===== ===== ===== =====
 
 type ApiResponse<T extends {}> = [data: T, errors: null] | [data: null, errors: string[]];
-type AsyncApiResponse<T extends {}> = Promise<ApiResponse<T>>;
+type ApiSuccessResponse = [true] | [false, errors: string[]];
 
 // ===== ===== ===== ===== =====
 // ENTITIES
@@ -17,8 +25,14 @@ type Word = {
   class: WordClass;
   def?: string;
   defs?: string[];
-  trl?: string[];
+  trl?: string;
   trls?: string[];
+  example?: string;
+  examples?: string[];
+};
+
+type User = {
+  email: string;
 };
 
 // ===== ===== ===== ===== =====
@@ -27,6 +41,8 @@ type Word = {
 
 export type {
   ApiResponse,
-  AsyncApiResponse,
+  ApiSuccessResponse,
+  JsonValue,
+  User,
   Word
 };

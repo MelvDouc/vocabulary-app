@@ -1,0 +1,39 @@
+.WordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  .FormGroup {
+    label {
+      display: block;
+      margin-bottom: 0.33em;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+    }
+
+    textarea {
+      padding: 0.5em;
+      resize: vertical;
+      font-family: inherit;
+      border: 1px solid var(--background-200);
+      color: var(--text-900);
+      background-color: var(--background-100);
+    }
+  }
+
+  .FormSubmit {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  @media only screen and (width >=400px) {
+    .FormSubmit {
+      justify-content: flex-start;
+    }
+  }
+}

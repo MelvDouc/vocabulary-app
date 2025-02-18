@@ -3,32 +3,11 @@
   padding: 1em;
   overflow-y: auto;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin-bottom: 1em;
-  }
-
   p {
     margin-block: 1em;
   }
 
   ul {
     list-style-position: inside;
-  }
-
-  @media only screen and (width >=400px) {
-    .word-list {
-      columns: 2;
-    }
-  }
-
-  @media only screen and (width >=650px) {
-    .word-list {
-      columns: 3;
-    }
   }
 }
