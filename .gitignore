@@ -1,0 +1,7 @@
+node_modules
+
+client/bundle
+server/dist
+
+.env
+.env.*

@@ -1,0 +1,31 @@
+{
+  "name": "voc-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsup",
+    "dev": "npm run build -- --watch",
+    "start": "node --env-file=.env server/dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "axios": "^1.7.9",
+    "client-side-router": "^1.2.1",
+    "esbuild-sass-plugin": "^3.3.1",
+    "reactfree-jsx": "^1.7.0",
+    "sass": "^1.85.0",
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "mime": "^4.0.6",
+    "mongodb": "^6.13.0",
+    "zod": "^3.24.2"
+  }
+}

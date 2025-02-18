@@ -1,0 +1,52 @@
+.Nav {
+  width: 100%;
+  background: var(--primary-600);
+  color: var(--text-50);
+  display: flex;
+  flex-direction: column;
+
+  .NavLeft {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      flex-grow: 1;
+      padding: 0.5em;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 200ms ease-out;
+
+      &:hover {
+        background-color: var(--secondary-200);
+        color: var(--text-900);
+      }
+    }
+  }
+
+  .NavRight {
+    display: grid;
+    place-items: center;
+    padding: 0.5em;
+
+    button {
+      all: unset;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media only screen and (width >=400px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2em;
+
+    .NavLeft {
+      flex-direction: row;
+    }
+  }
+}
