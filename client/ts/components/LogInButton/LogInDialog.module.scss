@@ -5,6 +5,7 @@
   width: min(100%, 700px);
   border: 0;
   border-radius: 5px;
+  background-color: var(--background-50);
 
   &::backdrop {
     background-color: rgb(0, 2, 102, 0.45);
@@ -24,7 +25,7 @@
     input {
       width: 100%;
       height: 2rem;
-      background-color: var(--background-50);
+      background-color: var(--background-100);
 
       &:focus {
         background-color: rgb(255, 254, 201);

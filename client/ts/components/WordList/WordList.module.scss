@@ -1,4 +1,8 @@
 .WordList {
+  a:hover {
+    color: var(--primary-700);
+  }
+
   @media only screen and (width >=400px) {
     columns: 2;
   }

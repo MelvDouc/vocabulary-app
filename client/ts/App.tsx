@@ -1,20 +1,28 @@
-import { Route, Router } from "client-side-router";
-import routes from "$client/utils/routes";
 import Nav from "$client/components/Nav/Nav";
+import Spinner from "$client/components/Spinner/Spinner";
+import ThemeToggler from "$client/components/ThemeToggler/ThemeToggler";
 import AddWordPage from "$client/pages/AddWordPage";
 import HomePage from "$client/pages/HomePage";
 import LanguagePage from "$client/pages/LanguagePage";
 import NotFoundPage from "$client/pages/NotFoundPage";
 import UpdateWordPage from "$client/pages/UpdateWordPage";
 import WordPage from "$client/pages/WordPage";
+import routes from "$client/utils/routes";
+import { Route, Router } from "client-side-router";
+import { obs } from "reactfree-jsx";
 import cssClasses from "./App.module.scss";
 
 export default function App() {
+  const openObs = obs(false);
+
   return (
     <>
       <Nav />
       <main className={cssClasses.Main}>
-        <Router>
+        <section className={cssClasses.MainTop}>
+          <ThemeToggler />
+        </section>
+        <Router onNavStarted={() => { openObs.value = true; }} onNavComplete={() => { openObs.value = false; }}>
           <Route
             path={routes.home()}
             component={HomePage}
@@ -47,6 +55,7 @@ export default function App() {
           />
         </Router>
       </main>
+      <Spinner openObs={openObs} />
     </>
   );
 }

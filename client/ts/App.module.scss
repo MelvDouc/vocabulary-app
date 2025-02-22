@@ -2,6 +2,9 @@
   flex-grow: 1;
   padding: 1em;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 
   p {
     margin-block: 1em;
@@ -10,4 +13,9 @@
   ul {
     list-style-position: inside;
   }
+}
+
+.MainTop {
+  display: flex;
+  justify-content: flex-end;
 }
