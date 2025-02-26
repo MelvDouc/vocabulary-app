@@ -19,7 +19,7 @@
     "axios": "^1.7.9",
     "client-side-router": "^1.2.1",
     "esbuild-sass-plugin": "^3.3.1",
-    "reactfree-jsx": "^1.7.0",
+    "reactfree-jsx": "^1.9.0",
     "sass": "^1.85.0",
     "tsup": "^8.3.6",
     "tsx": "^4.19.2",

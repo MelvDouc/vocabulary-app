@@ -1,10 +1,10 @@
 import Button from "$client/components/Button/Button";
 import LogInDialog from "$client/components/LogInButton/LogInDialog";
-import { TypedEventEmitter } from "reactfree-jsx";
+import { TypedEventEmitter } from "reactfree-jsx/extra";
 
 export default function LogInButton() {
   const eventEmitter = new TypedEventEmitter<{
-    showDialog: void;
+    showDialog: [];
   }>();
 
   const [onShowDialog, showDialog] = eventEmitter.createHandlers("showDialog");

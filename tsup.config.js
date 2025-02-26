@@ -17,7 +17,6 @@ export default defineConfig(({ watch }) => [
     platform: "browser",
     minify: !watch,
     tsconfig: "client/tsconfig.json",
-    inject: ["client/ts/_inject.ts"],
     esbuildPlugins: [
       sassPlugin({
         filter: /\.module\.scss$/,

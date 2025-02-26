@@ -1,3 +1,5 @@
+import { Route, Router } from "client-side-router";
+import { obs } from "reactfree-jsx";
 import Nav from "$client/components/Nav/Nav";
 import Spinner from "$client/components/Spinner/Spinner";
 import ThemeToggler from "$client/components/ThemeToggler/ThemeToggler";
@@ -8,8 +10,6 @@ import NotFoundPage from "$client/pages/NotFoundPage";
 import UpdateWordPage from "$client/pages/UpdateWordPage";
 import WordPage from "$client/pages/WordPage";
 import routes from "$client/utils/routes";
-import { Route, Router } from "client-side-router";
-import { obs } from "reactfree-jsx";
 import cssClasses from "./App.module.scss";
 
 export default function App() {
