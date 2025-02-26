@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { serve } from "@hono/node-server";
 import app from "$server/core/app.js";
 
@@ -7,7 +8,6 @@ serve(
     fetch: app.fetch
   },
   (info) => {
-    const hostname = info.address === "::" ? "http://localhost" : info.address;
-    console.log(`App running on ${hostname}:${info.port}...`);
+    console.log(`App running on port ${chalk.green(info.port)}`);
   }
 );
