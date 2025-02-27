@@ -11,6 +11,8 @@ languageRouter.get("/", async (ctx) => {
 languageRouter.get("/:language", async (ctx) => {
   const language = ctx.req.param("language");
   const words = await wordModel.getWords(language);
+  // Cache response 10 seconds.
+  ctx.res.headers.set("Cache-Control", "max-age=10");
   return ctx.json(words);
 });
 
