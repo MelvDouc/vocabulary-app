@@ -31,8 +31,8 @@ const UpdateWordPage = ProtectedPage(async ({ id }: { id: string; }) => {
   };
 
   return (
-    <Page>
-      <h1>Add a word</h1>
+    <Page title="Update a word">
+      <h1>Update a word</h1>
       <WordForm handleSubmit={handleSubmit} wordYaml={wordYaml} backUrl={routes.word(id)} />
       <ErrorList obs={errorObs} />
     </Page>

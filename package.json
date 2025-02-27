@@ -17,7 +17,7 @@
     "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^22.13.4",
     "axios": "^1.7.9",
-    "client-side-router": "^1.2.1",
+    "client-side-router": "^1.2.2",
     "esbuild-sass-plugin": "^3.3.1",
     "reactfree-jsx": "^1.9.0",
     "sass": "^1.85.0",

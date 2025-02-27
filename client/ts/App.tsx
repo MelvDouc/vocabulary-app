@@ -13,7 +13,7 @@ import routes from "$client/utils/routes";
 import cssClasses from "./App.module.scss";
 
 export default function App() {
-  const openObs = obs(false);
+  const spinnerOpenObs = obs(false);
 
   return (
     <>
@@ -22,7 +22,11 @@ export default function App() {
         <section className={cssClasses.MainTop}>
           <ThemeToggler />
         </section>
-        <Router onNavStarted={() => { openObs.value = true; }} onNavComplete={() => { openObs.value = false; }}>
+        <Router
+          onNavStarted={() => { spinnerOpenObs.value = true; }}
+          onNavComplete={() => { spinnerOpenObs.value = false; }}
+          internalLinks
+        >
           <Route
             path={routes.home()}
             component={HomePage}
@@ -55,7 +59,7 @@ export default function App() {
           />
         </Router>
       </main>
-      <Spinner openObs={openObs} />
+      <Spinner openObs={spinnerOpenObs} />
     </>
   );
 }

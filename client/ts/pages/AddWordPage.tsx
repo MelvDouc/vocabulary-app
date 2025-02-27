@@ -24,7 +24,7 @@ const AddWordPage = ProtectedPage(() => {
 
 
   return (
-    <Page>
+    <Page title="Add a word">
       <h1>Add a word</h1>
       <WordForm handleSubmit={handleSubmit} wordYaml={DEFAULT_YAML} />
       <ErrorList obs={errorObs} />

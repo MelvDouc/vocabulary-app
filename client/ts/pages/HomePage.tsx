@@ -8,7 +8,7 @@ export default async function HomePage() {
   languageObs.value = null;
 
   return (
-    <Page>
+    <Page title="Home">
       <h1>Home</h1>
       <Page.Section>
         <h2>Languages</h2>

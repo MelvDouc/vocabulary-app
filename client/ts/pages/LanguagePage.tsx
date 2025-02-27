@@ -10,7 +10,7 @@ export default async function LanguagePage({ language }: {
   const words = await getWords(language);
 
   return (
-    <Page>
+    <Page title={language}>
       <WordList words={words} />
       <p>Word count: <strong>{words.length}</strong>.</p>
     </Page>

@@ -20,7 +20,7 @@ export default async function WordPage({ id }: {
   const user = getUser();
 
   return (
-    <Page>
+    <Page title={word.entry}>
       <WordCard word={word} />
       {user && (
         <WordControls id={id} language={word.language} />

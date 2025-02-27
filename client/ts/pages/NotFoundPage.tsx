@@ -1,3 +1,4 @@
+import Page from "$client/components/Page/Page";
 import languageObs from "$client/utils/language-obs";
 
 export default function NotFoundPage({ message = "Page not found" }: {
@@ -6,6 +7,8 @@ export default function NotFoundPage({ message = "Page not found" }: {
   languageObs.value = null;
 
   return (
-    <p>{message}</p>
+    <Page title="Page not found">
+      <p>{message}</p>
+    </Page>
   );
 }
