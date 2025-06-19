@@ -1,4 +1,5 @@
 import Button from "$client/components/Button/Button";
+import WordFormTextarea from "$client/components/WordForm/WordFormTextarea";
 import cssClasses from "./WordForm.module.scss";
 
 export default function WordForm({ handleSubmit, backUrl, wordYaml }: {
@@ -19,15 +20,11 @@ export default function WordForm({ handleSubmit, backUrl, wordYaml }: {
   return (
     <form className={cssClasses.WordForm} $init={$initForm}>
       <section className={cssClasses.FormGroup}>
-        <textarea name={wordYamlName} placeholder="Word YAML..." rows={10} required>
-          {wordYaml}
-        </textarea>
+        <WordFormTextarea name={wordYamlName} text={wordYaml} />
       </section>
       <section className={cssClasses.FormSubmit}>
         <Button type="submit">Submit</Button>
-        {backUrl && (
-          <Button isDanger><a href={backUrl}>Cancel</a></Button>
-        )}
+        <Button onclick={() => history.back()} isDanger>Cancel</Button>
       </section>
     </form>
   );

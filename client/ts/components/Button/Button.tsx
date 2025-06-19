@@ -1,22 +1,23 @@
-import type { ComponentChild } from "reactfree-jsx";
 import cssClasses from "./Button.module.scss";
 
-export default function Button({ onclick, title, type = "button", isDanger, children }: {
-  onclick?: JSX.IntrinsicElements["button"]["onclick"];
-  title?: string;
-  type?: JSX.IntrinsicElements["button"]["type"];
+export default function Button({ children, ...props }: JSX.IntrinsicElements["button"] & {
   isDanger?: boolean;
-  children: ComponentChild;
 }) {
   return (
     <button
       className={{
         [cssClasses.Button]: true,
-        [cssClasses.Danger]: !!isDanger
+        [cssClasses.Danger]: !!props.isDanger
       }}
-      onclick={onclick}
-      title={title ?? ""}
-      type={type}
+      $init={(element) => {
+        props.$init?.(element);
+        // Ensure that clicking the padding clicks the child anchor element.
+        element.addEventListener("click", (e) => {
+          if (!(e.currentTarget instanceof HTMLAnchorElement))
+            element.querySelector("a")?.click();
+        });
+      }}
+      {...props}
     >{children}</button>
   );
 }

@@ -1,12 +1,12 @@
 .Button {
   all: unset;
-  cursor: pointer;
-  font-family: inherit;
   padding: 0.33em 0.5em;
   border-radius: 9999px;
+  font-family: inherit;
   color: var(--text-50);
   background-color: var(--primary-600);
   transition: all 200ms ease-in-out;
+  cursor: pointer;
 
   &.Danger {
     background-color: var(--accent-500);
