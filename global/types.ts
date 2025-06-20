@@ -19,17 +19,28 @@ type ApiSuccessResponse = [true] | [false, errors: string[]];
 
 type WordClass = "adj" | "adv" | "conj" | "idiom" | "interj" | "n" | "phrase" | "prep" | "pron" | "v";
 
-type Word = {
-  entry: string;
-  language: string;
-  class: WordClass;
+interface Meaning {
   def?: string;
   defs?: string[];
-  trl?: string;
+  trl?: string[];
   trls?: string[];
   example?: string;
   examples?: string[];
-};
+}
+
+interface WordBase {
+  entry: string;
+  class: WordClass;
+  meanings: Meaning[];
+  prn?: string;
+  register?: string;
+  dialect?: string;
+}
+
+interface Word extends WordBase {
+  language: string;
+  related?: WordBase[];
+}
 
 type User = {
   email: string;
