@@ -1,5 +1,5 @@
 import { Hono as Router } from "hono";
-import { parse as yamlParse, stringify as yamlStringify } from "yaml";
+import TOML from "smol-toml";
 import { requireAuth } from "$server/middleware/auth.middleware.js";
 import wordModel from "$server/models/word.model.js";
 import type { JsonValue, SerializedWord } from "$server/types.js";
@@ -24,10 +24,10 @@ wordRouter.use(async (ctx, next) => {
 wordRouter.get("/", async (ctx) => {
   const word = ctx.get("word");
 
-  // Add option to get word as YAML string.
-  if (word && ctx.req.query("yaml")) {
+  // Add option to get word as TOML string.
+  if (word && ctx.req.query("toml")) {
     const { id, ...data } = word;
-    return ctx.json(yamlStringify(data));
+    return ctx.json(TOML.stringify(data));
   }
 
   return ctx.json(word);
@@ -36,7 +36,7 @@ wordRouter.get("/", async (ctx) => {
 
 wordRouter.post("/add", requireAuth, async (ctx) => {
   const body = await ctx.req.json();
-  const data = safeParseYaml(body.yaml as string);
+  const data = safeParseToml(body.toml as string);
   const apiResponse = await wordModel.addWord(data);
   return ctx.json(apiResponse);
 });
@@ -48,7 +48,7 @@ wordRouter.put("/update", requireAuth, async (ctx) => {
     return ctx.json([false, ["Word not found."]]);
 
   const body = await ctx.req.json();
-  const data = safeParseYaml(body.yaml as string);
+  const data = safeParseToml(body.toml as string);
   const apiResponse = await wordModel.replaceWord(word.id, data);
   return ctx.json(apiResponse);
 });
@@ -63,9 +63,9 @@ wordRouter.delete("/delete", requireAuth, async (ctx) => {
   return ctx.json(apiResponse);
 });
 
-function safeParseYaml(yaml: string): JsonValue {
+function safeParseToml(toml: string): JsonValue {
   try {
-    return yamlParse(yaml);
+    return TOML.parse(toml) as JsonValue;
   } catch {
     return null;
   }

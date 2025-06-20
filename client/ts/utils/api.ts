@@ -17,10 +17,10 @@ export async function getWords(language: string) {
   return response.data;
 }
 
-export async function getWord<Y extends boolean>(id: string, asYaml: Y) {
+export async function getWord<Y extends boolean>(id: string, asToml: Y) {
   const searchParams = new URLSearchParams();
   searchParams.set("id", id);
-  asYaml && searchParams.set("yaml", "1");
+  asToml && searchParams.set("toml", "1");
   const url = `${BASE_URL}/words?${searchParams}`;
   const response = await axios.get<(Y extends true ? string : Word) | null>(url);
   return response.data;
@@ -32,13 +32,13 @@ export async function getRandomWordId(language: string) {
   return response.data;
 }
 
-export async function addWord(yaml: string) {
-  const response = await axios.post(`${BASE_URL}/words/add`, { yaml });
+export async function addWord(toml: string) {
+  const response = await axios.post(`${BASE_URL}/words/add`, { toml });
   return response.data as ApiResponse<Word>;
 }
 
-export async function updateWord(id: string, yaml: string) {
-  const response = await axios.put(`${BASE_URL}/words/update?id=${id}`, { yaml });
+export async function updateWord(id: string, toml: string) {
+  const response = await axios.put(`${BASE_URL}/words/update?id=${id}`, { toml });
   return response.data as ApiSuccessResponse;
 }
 

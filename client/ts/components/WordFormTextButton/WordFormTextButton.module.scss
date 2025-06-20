@@ -1,0 +1,11 @@
+.WordFormTextButton {
+  all: unset;
+  padding: 0.25em 0.4em;
+  border-radius: 5px;
+  font-family: inherit;
+  color: var(--text-50);
+  background-color: var(--secondary-400);
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}

@@ -1,7 +1,8 @@
 .WordForm {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1.25em;
+  margin-bottom: 0.5em;
 
   .FormGroup {
     label {
@@ -22,6 +23,11 @@
       color: var(--text-900);
       background-color: var(--background-100);
     }
+  }
+
+  .TextButtons {
+    display: flex;
+    gap: 1em;
   }
 
   .FormSubmit {

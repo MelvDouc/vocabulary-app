@@ -11,8 +11,8 @@ const AddWordPage = ProtectedPage(() => {
 
   const errorObs = createErrorObs();
 
-  const handleSubmit = async (yaml: string) => {
-    const [word, errors] = await addWord(yaml);
+  const handleSubmit = async (text: string) => {
+    const [word, errors] = await addWord(text);
 
     if (errors) {
       errorObs.value = errors;
@@ -26,14 +26,18 @@ const AddWordPage = ProtectedPage(() => {
   return (
     <Page title="Add a word">
       <h1>Add a word</h1>
-      <WordForm handleSubmit={handleSubmit} wordYaml={DEFAULT_YAML} />
+      <WordForm handleSubmit={handleSubmit} data={DEFAULT_TEXT} />
       <ErrorList obs={errorObs} />
     </Page>
   );
 });
 
-const DEFAULT_YAML = "entry: ''\n"
-  + "class: n\n"
-  + "language: en";
+const DEFAULT_TEXT = [
+  "entry = \"\"",
+  "language = \"en\"",
+  "class = \"n\"",
+  "[[meanings]]",
+  ""
+].join("\n");
 
 export default AddWordPage;
