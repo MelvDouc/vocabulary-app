@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* lib */
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    /* strictness */
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    /* path aliases */
+    "baseUrl": ".",
+    "paths": {
+      "$global/*": [
+        "../global/*"
+      ],
+      "$client/*": [
+        "./src/*"
+      ]
+    },
+    /* JSX */
+    "jsx": "react-jsx",
+    "jsxImportSource": "reactfree-jsx"
+  }
+}
