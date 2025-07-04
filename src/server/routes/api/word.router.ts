@@ -26,7 +26,7 @@ wordRouter.get("/", async (ctx) => {
   const word = ctx.get("word");
 
   // Add option to get word as TOML string.
-  if (word && ctx.req.query("toml")) {
+  if (word && ctx.req.query("as-text")) {
     const { id, ...data } = word;
     return ctx.json(TOML.stringify(data));
   }
@@ -37,7 +37,7 @@ wordRouter.get("/", async (ctx) => {
 
 wordRouter.post("/add", requireAuth, async (ctx) => {
   const body = await ctx.req.json();
-  const data = safeParseToml(body.toml as string);
+  const data = safeParseToml(body.text as string);
   const apiResponse = await wordModel.addWord(data);
   return ctx.json(apiResponse);
 });
@@ -49,7 +49,7 @@ wordRouter.put("/update", requireAuth, async (ctx) => {
     return ctx.json([false, ["Word not found."]]);
 
   const body = await ctx.req.json();
-  const data = safeParseToml(body.toml as string);
+  const data = safeParseToml(body.text as string);
   const apiResponse = await wordModel.replaceWord(word.id, data);
   return ctx.json(apiResponse);
 });
@@ -58,15 +58,16 @@ wordRouter.delete("/delete", requireAuth, async (ctx) => {
   const word = ctx.get("word");
 
   if (!word)
-    return ctx.json([false, ["Word not found."]]);
+    return ctx.json([null, ["Word not found."]]);
 
   const apiResponse = await wordModel.deleteWord(word.id);
   return ctx.json(apiResponse);
 });
 
-function safeParseToml(toml: string): JsonValue {
+function safeParseToml(text: string): JsonValue {
   try {
-    return TOML.parse(toml) as JsonValue;
+    console.log(text);
+    return TOML.parse(text) as JsonValue;
   } catch {
     return null;
   }

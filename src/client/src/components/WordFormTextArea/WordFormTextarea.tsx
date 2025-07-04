@@ -17,6 +17,7 @@ export default function WordFormTextarea({ name, text, onTextInsert }: {
       rows={10}
       required
       onkeydown={handleKeyDown}
+      value={text}
       $init={(element) => {
         onTextInsert((text) => {
           const { selectionStart, selectionEnd, value } = element;
@@ -27,7 +28,7 @@ export default function WordFormTextarea({ name, text, onTextInsert }: {
           element.setSelectionRange(selectionStart + text.length, selectionStart + text.length);
         });
       }}
-    >{text}</textarea>
+    ></textarea>
   );
 }
 

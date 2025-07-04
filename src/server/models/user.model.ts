@@ -1,13 +1,13 @@
 import { z } from "zod";
 import auth from "$server/core/auth.js";
-import type { ApiResponse } from "$server/types.js";
+import type { Result } from "$server/types.js";
 
 const UserCredentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1)
 });
 
-async function logIn(userCredentials: unknown): Promise<ApiResponse<string>> {
+async function logIn(userCredentials: unknown): Promise<Result<string>> {
   const { success, data } = UserCredentialsSchema.safeParse(userCredentials);
 
   if (!success)

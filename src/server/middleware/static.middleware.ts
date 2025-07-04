@@ -1,5 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { existsSync as pathExists } from "node:fs";
+import { join as pathJoin } from "node:path";
 
 import type { MiddlewareHandler } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
@@ -12,20 +12,15 @@ export async function createStaticHandler(isProduction: boolean): Promise<Static
 
 function handleStaticProd(): StaticMiddlewareHandler {
   const staticDir = "dist";
-  let html = "";
+  const indexHtmlPath = pathJoin(staticDir, "index.html");
 
   return serveStatic({
-    root: staticDir,
-    onNotFound: async (path, ctx) => {
-      try {
-        html ||= await readFile(join(staticDir, "index.html"), "utf-8");
-        ctx.html(html);
-      } catch (error) {
-        console.dir({ staticFileError: error, path }, {
-          depth: Infinity, colors: true
-        });
-        ctx.newResponse(`Static file not found: "${path}".`, 404);
-      }
+    rewriteRequestPath: (path) => {
+      const prefixedPath = pathJoin(staticDir, path);
+
+      return pathExists(prefixedPath)
+        ? prefixedPath
+        : indexHtmlPath;
     }
   });
 }
@@ -35,7 +30,7 @@ async function handleStaticDev(): Promise<StaticMiddlewareHandler> {
 
   const viteServer = await createViteServer({
     server: { middlewareMode: true },
-    root: join(process.cwd(), "src", "client")
+    root: pathJoin(process.cwd(), "src", "client")
   });
 
   // Use Vite's middleware for static files and HMR.
@@ -48,6 +43,5 @@ async function handleStaticDev(): Promise<StaticMiddlewareHandler> {
     });
   };
 }
-
 
 type StaticMiddlewareHandler = MiddlewareHandler<HttpBindingsEnv>;

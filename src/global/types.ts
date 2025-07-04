@@ -2,16 +2,19 @@
 // JSON
 // ===== ===== ===== ===== =====
 
-type JsonArray = JsonValue[];
-type JsonDict = { [key: string]: JsonValue; };
-type JsonValue = string | number | boolean | null | JsonArray | JsonDict;
+export type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue; };
 
 // ===== ===== ===== ===== =====
 // API
 // ===== ===== ===== ===== =====
 
-type ApiResponse<T extends {}> = [data: T, errors: null] | [data: null, errors: string[]];
-type ApiSuccessResponse = [true] | [false, errors: string[]];
+export type Result<T extends {}> = [data: T, errors: null] | [data: null, errors: string[]];
 
 // ===== ===== ===== ===== =====
 // ENTITIES
@@ -37,23 +40,11 @@ interface WordBase {
   dialect?: string;
 }
 
-interface Word extends WordBase {
+export interface Word extends WordBase {
   language: string;
   related?: WordBase[];
 }
 
-type User = {
+export type User = {
   email: string;
-};
-
-// ===== ===== ===== ===== =====
-// EXPORTS
-// ===== ===== ===== ===== =====
-
-export type {
-  ApiResponse,
-  ApiSuccessResponse,
-  JsonValue,
-  User,
-  Word
 };

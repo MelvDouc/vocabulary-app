@@ -1,8 +1,7 @@
 import type { HttpBindings } from "@hono/node-server";
 
 import type {
-  ApiResponse,
-  ApiSuccessResponse,
+  Result,
   JsonValue,
   User as _User,
   Word
@@ -33,8 +32,7 @@ export interface HttpBindingsEnv {
 }
 
 export type {
-  ApiResponse,
-  ApiSuccessResponse,
+  Result,
   JsonValue,
   Word,
   SerializedWord,

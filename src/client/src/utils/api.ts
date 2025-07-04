@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { ApiResponse, ApiSuccessResponse, Word } from "$client/types.js";
+import type { Result, Word } from "$client/types.js";
 
 const BASE_URL = "/api/v1";
 
@@ -17,10 +17,11 @@ export async function getWords(language: string) {
   return response.data;
 }
 
-export async function getWord<Y extends boolean>(id: string, asToml: Y) {
+export async function getWord<Y extends boolean>(id: string, asText: Y) {
   const searchParams = new URLSearchParams();
   searchParams.set("id", id);
-  asToml && searchParams.set("toml", "1");
+  asText && searchParams.set("as-text", "1");
+
   const url = `${BASE_URL}/words?${searchParams}`;
   const response = await axios.get<(Y extends true ? string : Word) | null>(url);
   return response.data;
@@ -32,19 +33,19 @@ export async function getRandomWordId(language: string) {
   return response.data;
 }
 
-export async function addWord(toml: string) {
-  const response = await axios.post(`${BASE_URL}/words/add`, { toml });
-  return response.data as ApiResponse<Word>;
+export async function addWord(text: string) {
+  const response = await axios.post(`${BASE_URL}/words/add`, { text });
+  return response.data as Result<Word>;
 }
 
-export async function updateWord(id: string, toml: string) {
-  const response = await axios.put(`${BASE_URL}/words/update?id=${id}`, { toml });
-  return response.data as ApiSuccessResponse;
+export async function updateWord(id: string, text: string) {
+  const response = await axios.put(`${BASE_URL}/words/update?id=${id}`, { text });
+  return response.data as Result<true>;
 }
 
 export async function deleteWord(id: string) {
   const response = await axios.delete(`${BASE_URL}/words/delete?id=${id}`);
-  return response.data as ApiSuccessResponse;
+  return response.data as Result<true>;
 }
 
 // ===== ===== ===== ===== =====
@@ -58,7 +59,7 @@ export async function checkCredentials() {
 
 export async function logIn(email: string, password: string) {
   const response = await axios.post(`${BASE_URL}/auth/log-in`, { email, password });
-  return response.data as ApiSuccessResponse;
+  return response.data as Result<true>;
 }
 
 export function logOut() {

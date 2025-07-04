@@ -2,7 +2,7 @@ import { ObjectId, type WithId } from "mongodb";
 import { z } from "zod";
 
 import { collections } from "$server/core/database.js";
-import type { ApiResponse, ApiSuccessResponse, SerializedWord, Word } from "$server/types.ts";
+import type { Result, SerializedWord, Word } from "$server/types.ts";
 import { getErrorMessages } from "$server/utils/errors.js";
 
 const WordSchema = z.object({
@@ -53,7 +53,7 @@ async function getRandomWordId(language: string): Promise<string | null> {
   }
 }
 
-async function addWord(data: unknown): Promise<ApiResponse<SerializedWord>> {
+async function addWord(data: unknown): Promise<Result<SerializedWord>> {
   try {
     WordSchema.parse(data);
     const result = await collections.word.insertOne(data as Word);
@@ -67,22 +67,22 @@ async function addWord(data: unknown): Promise<ApiResponse<SerializedWord>> {
   }
 }
 
-async function replaceWord(id: string, data: unknown): Promise<ApiSuccessResponse> {
+async function replaceWord(id: string, data: unknown): Promise<Result<true>> {
   try {
     WordSchema.parse(data);
     await collections.word.replaceOne({ _id: new ObjectId(id) }, data as Word);
-    return [true];
+    return [true, null];
   } catch (error) {
-    return [false, getErrorMessages(error)];
+    return [null, getErrorMessages(error)];
   }
 }
 
-async function deleteWord(id: string): Promise<ApiSuccessResponse> {
+async function deleteWord(id: string): Promise<Result<true>> {
   try {
     await collections.word.deleteOne({ _id: new ObjectId(id) });
-    return [true];
+    return [true, null];
   } catch (error) {
-    return [false, getErrorMessages(error)];
+    return [null, getErrorMessages(error)];
   }
 }
 
