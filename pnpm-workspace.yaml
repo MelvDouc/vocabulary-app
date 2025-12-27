@@ -1,0 +1,11 @@
+packages:
+  - packages/*
+
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - esbuild
+
+injectWorkspacePackages: true
+
+syncInjectedDepsAfterScripts:
+  - build

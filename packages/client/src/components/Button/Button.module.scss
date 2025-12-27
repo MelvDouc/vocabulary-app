@@ -1,0 +1,36 @@
+.Button {
+  all: unset;
+  padding: 0.33em 0.5em;
+  border-radius: 5px;
+  font-family: inherit;
+  color: var(--text-50);
+  background-color: var(--primary-600);
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+
+  &.pill {
+    border-radius: 9999px;
+  }
+
+  &[data-type="secondary"] {
+    background-color: var(--secondary-400);
+  }
+
+  &[data-type="danger"] {
+    background-color: var(--accent-500);
+  }
+
+  &:active {
+    scale: 0.975;
+  }
+
+  &:has(a) {
+    padding: 0;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none;
+    padding: 0.33em 0.5em;
+  }
+}

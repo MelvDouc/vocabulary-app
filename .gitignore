@@ -28,3 +28,4 @@ dist-ssr
 !.env.development
 
 local
+.pnpm-store

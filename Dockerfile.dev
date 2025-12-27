@@ -1,0 +1,27 @@
+FROM node:22-slim AS base
+
+RUN corepack enable pnpm
+
+WORKDIR /app
+
+COPY package.json pnpm*.yaml ./
+COPY packages/client/package.json ./packages/client/
+COPY packages/server/package.json ./packages/server/
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+
+
+FROM base AS server
+
+WORKDIR /app/packages/server
+
+RUN apt update && apt install -y curl
+
+CMD ["pnpm", "run", "dev"]
+
+
+FROM base AS client
+
+WORKDIR /app/packages/client
+
+CMD ["pnpm", "run", "dev"]

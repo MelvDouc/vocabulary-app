@@ -3,7 +3,7 @@ services:
     image: mongo:latest
     container_name: voc_database
     command: --logpath /var/log/mongodb/mongod.log --logappend
-    restart: no
+    restart: unless-stopped
     volumes:
       - voc_data:/data/db
     healthcheck:
@@ -17,20 +17,15 @@ services:
     image: voc_server
     container_name: voc_server
     build:
-      context: .
-      dockerfile: Dockerfile.dev
       target: server
-    env_file:
-      - ./packages/server/.env.development
-    restart: no
+    restart: unless-stopped
     depends_on:
       database:
         condition: service_healthy
+    env_file:
+      - ./packages/server/.env
     ports:
       - 5174:5174
-    volumes:
-      - .:/app
-      - /app/node_modules
     healthcheck:
       test: curl --fail http://localhost:5174/health || exit 1
       interval: 5s
@@ -42,18 +37,13 @@ services:
     image: voc_client
     container_name: voc_client
     build:
-      context: .
-      dockerfile: Dockerfile.dev
       target: client
-    restart: no
+    restart: unless-stopped
     depends_on:
       server:
         condition: service_healthy
     ports:
-      - 5173:5173
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - 5173:80
 
 volumes:
   voc_data:
