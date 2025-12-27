@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* lib */
+    "target": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
+    "module": "Node18",
+    "skipLibCheck": true,
+    /* strictness */
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    /* path aliases */
+    "baseUrl": "src",
+    "paths": {
+      "$server/*": [
+        "./*"
+      ]
+    }
+  }
+}

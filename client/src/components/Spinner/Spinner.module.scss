@@ -1,0 +1,28 @@
+.Spinner {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border: 0;
+  background-color: transparent;
+}
+
+.SpinnerImage {
+  width: min(400px, 100%);
+  visibility: hidden;
+  animation-name: spin;
+  animation-delay: 500ms;
+  animation-duration: 1200ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  from {
+    visibility: visible;
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}

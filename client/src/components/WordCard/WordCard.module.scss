@@ -1,0 +1,36 @@
+.WordCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
+
+  dt {
+    display: block;
+    font-weight: bold;
+  }
+
+  dd {
+    display: block;
+    margin-inline-start: 1em;
+  }
+
+  ol {
+    margin-inline-start: 1em;
+
+    ol {
+      list-style-type: lower-alpha;
+
+      ol {
+        list-style-type: square;
+      }
+    }
+  }
+}

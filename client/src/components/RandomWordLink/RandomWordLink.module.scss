@@ -1,0 +1,9 @@
+.RandomWordLink {
+  all: unset;
+  cursor: pointer;
+  display: none;
+
+  &.Visible {
+    display: block;
+  }
+}

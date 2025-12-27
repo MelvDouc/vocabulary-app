@@ -1,0 +1,50 @@
+$track-height: 2em;
+$track-width: 58px;
+$track-padding-block: 2px;
+$track-padding-inline: $track-padding-block * 2;
+
+.ToggleSwitch {
+  display: block;
+  width: fit-content;
+  user-select: none;
+
+  .Track {
+    --slider-bg-clr: rgb(239, 239, 245);
+    height: $track-height;
+    width: $track-width;
+    border-radius: 99999px;
+    position: relative;
+    background-color: var(--primary-600);
+    transition: all var(--animation-duration) ease-out;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      transition: inherit;
+      height: calc(100% - $track-padding-block * 2);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: var(--slider-bg-clr);
+      position: absolute;
+      top: 50%;
+      right: calc(100% - $track-padding-inline);
+      translate: 100% -50%;
+      font-size: 10px;
+      text-align: center;
+      align-content: center;
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked+.Track {
+      --slider-bg-clr: rgb(25, 25, 50);
+
+      &::before {
+        right: $track-padding-inline;
+        translate: 0 -50%;
+      }
+    }
+  }
+}

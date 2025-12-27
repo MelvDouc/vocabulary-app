@@ -1,0 +1,13 @@
+$base-gap: 0.33em;
+
+.Page {
+  display: flex;
+  flex-direction: column;
+  gap: $base-gap * 3;
+}
+
+.PageSection {
+  display: flex;
+  flex-direction: column;
+  gap: $base-gap * 2;
+}
