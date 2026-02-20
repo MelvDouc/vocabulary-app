@@ -1,27 +1,11 @@
 services:
-  database:
-    image: mongo:latest
-    container_name: voc_database
-    command: --logpath /var/log/mongodb/mongod.log --logappend
-    restart: unless-stopped
-    volumes:
-      - voc_data:/data/db
-    healthcheck:
-      test: mongosh --eval "db.adminCommand('ping')"
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
-
   server:
     image: voc_server
     container_name: voc_server
     build:
+      dockerfile: docker/Dockerfile
       target: server
     restart: unless-stopped
-    depends_on:
-      database:
-        condition: service_healthy
     env_file:
       - ./packages/server/.env
     ports:
@@ -37,6 +21,7 @@ services:
     image: voc_client
     container_name: voc_client
     build:
+      dockerfile: docker/Dockerfile
       target: client
     restart: unless-stopped
     depends_on:
@@ -44,6 +29,3 @@ services:
         condition: service_healthy
     ports:
       - 5173:80
-
-volumes:
-  voc_data:

@@ -1,27 +1,27 @@
 # Git
-**/.git/
-**/.gitignore
+.git/
+.gitignore
 
 # Settings
-**/.vscode/
+.vscode/
 
 # Environment variables
-**/.env
-**/.env.prod
+.env
+.env.prod
 
 # Config
-**/Dockerfile
-**/Dockerfile.*
+Dockerfile
+Dockerfile.*
 
 # Build
-**/dist/
+dist/
 
 # Local files
-**/local/
+local/
 
 # Dependencies
-**/node_modules/
-.pnpm-store
+node_modules/
+.pnpm-store/
 
 # Docs
 README.md

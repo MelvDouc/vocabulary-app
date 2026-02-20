@@ -16,7 +16,6 @@
     "@types/node": "^24.0.3",
     "reactfree-jsx": "^1.12.0",
     "sass": "^1.89.2",
-    "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }

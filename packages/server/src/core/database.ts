@@ -12,13 +12,6 @@ const collections = {
   user: db.collection<User>("user")
 } as const;
 
-const closeGracefully = async (): Promise<void> => {
-  await client.close();
-};
-
-process.on("SIGINT", closeGracefully);
-process.on("SIGTERM", closeGracefully);
-
 export {
   collections
 };

@@ -1,13 +1,11 @@
-FROM node:22-slim AS base
+FROM node:24-slim AS base
 
 
 FROM base AS builder
 
 WORKDIR /app
 
-COPY package.json pnpm*.yaml ./
-COPY packages/client/package.json ./packages/client/
-COPY packages/server/package.json ./packages/server/
+COPY --parents --exclude=node_modules **/package.json pnpm*.yaml ./
 
 RUN corepack enable pnpm
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
@@ -27,7 +25,6 @@ RUN apt update && apt install -y curl
 COPY --from=builder /app/prod/server/ ./
 
 USER node
-
 CMD [ "node", "dist/index.js" ]
 
 
