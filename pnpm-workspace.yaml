@@ -9,3 +9,7 @@ injectWorkspacePackages: true
 
 syncInjectedDepsAfterScripts:
   - build
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true

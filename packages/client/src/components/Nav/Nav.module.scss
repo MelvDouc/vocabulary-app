@@ -1,7 +1,7 @@
 .Nav {
   width: 100%;
-  background: var(--primary-600);
-  color: var(--text-50);
+  background: var(--bg-nav);
+  color: var(--text-rev);
   display: flex;
   flex-direction: column;
 
@@ -20,8 +20,8 @@
       transition: background-color 200ms ease-out;
 
       &:hover {
-        background-color: var(--secondary-200);
-        color: var(--text-900);
+        background-color: var(--bg-nav-btn-hover);
+        color: var(--text-main-text);
       }
     }
 

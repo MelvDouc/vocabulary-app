@@ -3,8 +3,8 @@
   padding: 0.33em 0.5em;
   border-radius: 5px;
   font-family: inherit;
-  color: var(--text-50);
-  background-color: var(--primary-600);
+  color: var(--text-rev);
+  background-color: var(--bg-btn);
   transition: all 200ms ease-in-out;
   cursor: pointer;
 
@@ -13,11 +13,11 @@
   }
 
   &[data-type="secondary"] {
-    background-color: var(--secondary-400);
+    background-color: var(--bg-btn-secondary);
   }
 
   &[data-type="danger"] {
-    background-color: var(--accent-500);
+    background-color: var(--bg-btn-danger);
   }
 
   &:active {

@@ -14,7 +14,7 @@ $track-padding-inline: $track-padding-block * 2;
     width: $track-width;
     border-radius: 99999px;
     position: relative;
-    background-color: var(--primary-600);
+    background-color: var(--bg-btn);
     transition: all var(--animation-duration) ease-out;
     cursor: pointer;
 

@@ -13,6 +13,18 @@
   ul {
     list-style-position: inside;
   }
+
+  a {
+    color: var(--text-main-link);
+
+    &:visited {
+      color: var(--text-main-link-visited);
+    }
+
+    &:hover {
+      color: var(--text-main-link-hover);
+    }
+  }
 }
 
 .MainTop {
