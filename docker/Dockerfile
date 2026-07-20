@@ -1,13 +1,13 @@
-FROM node:24-slim AS base
+FROM node:24-slim AS builder
 
-
-FROM base AS builder
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME/bin:$PATH"
+RUN corepack enable
+ENV CI=true
 
 WORKDIR /app
 
 COPY --parents --exclude=node_modules **/package.json pnpm*.yaml ./
-
-RUN corepack enable pnpm
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 COPY . ./
@@ -16,12 +16,11 @@ RUN pnpm deploy --filter=client --prod ./prod/client/
 RUN pnpm deploy --filter=server --prod ./prod/server/
 
 
-FROM base AS server
+FROM builder AS server
+
+RUN apt update && apt install -y --no-install-recommends curl
 
 WORKDIR /app
-
-RUN apt update && apt install -y curl
-
 COPY --from=builder /app/prod/server/ ./
 
 USER node

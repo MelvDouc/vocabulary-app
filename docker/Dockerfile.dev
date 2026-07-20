@@ -1,6 +1,9 @@
 FROM node:24-slim AS base
 
-RUN corepack enable pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME/bin:$PATH"
+RUN corepack enable
+ENV CI=true
 
 WORKDIR /app
 
@@ -12,7 +15,10 @@ FROM base AS server
 
 WORKDIR /app/packages/server
 
-RUN apt update && apt install -y curl
+RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+  --mount=target=/var/cache/apt,type=cache,sharing=locked \
+  rm -f /etc/apt/apt.conf.d/docker-clean \
+  && apt update && apt -y --no-install-recommends install curl
 
 CMD ["pnpm", "run", "dev"]
 
