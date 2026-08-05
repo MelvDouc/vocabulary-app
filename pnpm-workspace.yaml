@@ -12,4 +12,5 @@ syncInjectedDepsAfterScripts:
 
 allowBuilds:
   '@parcel/watcher': true
+  bcrypt: true
   esbuild: true

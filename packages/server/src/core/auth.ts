@@ -1,5 +1,5 @@
 import { collections } from "$server/core/database.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const cookieName = "auth_token";

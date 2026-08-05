@@ -13,10 +13,10 @@
   "license": "ISC",
   "description": "My personal vocabulary-learning application.",
   "devDependencies": {
-    "@types/node": "^24.0.3",
-    "reactfree-jsx": "^1.12.0",
-    "sass": "^1.89.2",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "@types/node": "^26.1.2",
+    "reactfree-jsx": "^1.13.0",
+    "sass": "^1.102.0",
+    "typescript": "^7.0.2",
+    "vite": "^6.4.3"
   }
 }

@@ -13,10 +13,9 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
     /* path aliases */
-    "baseUrl": "src",
     "paths": {
       "$server/*": [
-        "./*"
+        "./src/*"
       ]
     }
   }
