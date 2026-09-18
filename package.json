@@ -10,10 +10,10 @@
     "build": "docker compose build",
     "dev:start": "pnpm dev:compose up --build",
     "dev:stop": "pnpm dev:compose down",
-    "dev:compose": "docker compose -f docker-compose.dev.yml"
+    "dev:compose": "docker compose -f docker-compose.dev.yaml"
   },
   "keywords": [],
   "author": "Melvin Doucet <melv.douc@gmail.com>",
   "license": "ISC",
-  "packageManager": "pnpm@11.15.0"
+  "packageManager": "pnpm@12.4.2"
 }

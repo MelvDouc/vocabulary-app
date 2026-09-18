@@ -3,7 +3,6 @@ services:
     image: voc_server
     container_name: voc_server
     build:
-      dockerfile: docker/Dockerfile
       target: server
     restart: unless-stopped
     env_file:
@@ -23,7 +22,6 @@ services:
     image: voc_client
     container_name: voc_client
     build:
-      dockerfile: docker/Dockerfile
       target: client
     restart: unless-stopped
     depends_on:

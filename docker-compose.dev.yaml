@@ -3,8 +3,7 @@ services:
     image: voc_server
     container_name: voc_server
     build:
-      context: .
-      dockerfile: docker/Dockerfile.dev
+      dockerfile: Dockerfile.dev
       target: server
     env_file:
       - ./packages/server/.env
@@ -27,8 +26,7 @@ services:
     image: voc_client
     container_name: voc_client
     build:
-      context: .
-      dockerfile: docker/Dockerfile.dev
+      dockerfile: Dockerfile.dev
       target: client
     restart: no
     depends_on:
