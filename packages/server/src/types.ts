@@ -1,3 +1,5 @@
+import type { Word } from "common";
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -20,31 +22,6 @@ export type JsonValue =
   | JsonValue[]
   | { [key: string]: JsonValue; };
 
-type WordClass = "adj" | "adv" | "conj" | "idiom" | "interj" | "n" | "phrase" | "prep" | "pron" | "v";
-
-interface Meaning {
-  def?: string;
-  defs?: string[];
-  trl?: string[];
-  trls?: string[];
-  example?: string;
-  examples?: string[];
-}
-
-interface WordBase {
-  entry: string;
-  class: WordClass;
-  meanings: Meaning[];
-  prn?: string;
-  register?: string;
-  dialect?: string;
-}
-
-export interface Word extends WordBase {
-  language: string;
-  related?: WordBase[];
-}
-
 export type User = {
   email: string;
   password: string;
@@ -56,3 +33,5 @@ export interface HttpBindingsEnv {
    */
   Bindings: import("@hono/node-server").HttpBindings;
 }
+
+export type { Word };

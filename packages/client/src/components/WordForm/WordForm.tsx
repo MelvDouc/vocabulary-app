@@ -1,7 +1,6 @@
 import Button from "$client/components/Button/Button.js";
 import WordFormTextarea from "$client/components/WordFormTextArea/WordFormTextarea.js";
 import { TypedEventEmitter } from "reactfree-jsx/extra";
-
 import cssClasses from "./WordForm.module.scss";
 
 export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
@@ -31,7 +30,7 @@ export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
         <Button
           type="button"
           colorType="secondary"
-          on:click={() => emitTextInsert('[[meanings]]\ndef = ""\n')}
+          on:click={() => emitTextInsert('[[meaning]]\ndef = ""\n')}
         >meanings</Button>
         <Button
           type="button"
@@ -48,6 +47,6 @@ export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
 }
 
 const DEFAULT_TEXT =
-  'entry = ""\n'
-  + 'language = "en"\n'
-  + 'class = "n"\n';
+  '"@label" = ""\n'
+  + '"@language" = "en"\n'
+  + '"@class" = "n"\n';

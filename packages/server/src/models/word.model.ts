@@ -5,28 +5,28 @@ import { ObjectId, type WithId } from "mongodb";
 import { z } from "zod";
 
 const WordSchema = z.object({
-  entry: z
-    .string({ required_error: "Entry required." })
+  "@label": z
+    .string({ error: "Entry required." })
     .min(1, "Entry required."),
-  language: z
-    .string({ required_error: "Language required" })
+  "@language": z
+    .string({ error: "Language required" })
     .min(1, "Language required."),
-  class: z
-    .string({ required_error: "Word class required." })
+  "@class": z
+    .string({ error: "Word class required." })
     .min(1, "Word class required.")
 });
 
 const getLanguages = asyncWrapper(
-  () => collections.word.distinct("language"),
+  () => collections.word.distinct("@language"),
   () => "Language list is unavailable."
 );
 
 const getWords = asyncWrapper(
   (language: string) => {
     return collections.word
-      .find({ language })
+      .find({ "@language": language })
       .collation({ locale: language })
-      .map(({ _id, entry }) => ({ _id, entry }))
+      .map(({ _id, "@label": label }) => ({ _id, "@label": label }))
       .sort({ entry: 1 })
       .toArray();
   },
@@ -36,9 +36,12 @@ const getWords = asyncWrapper(
 const getWordsBetween = asyncWrapper(
   (language: string, range: LetterRange) => {
     return collections.word
-      .find({ language, entry: { $regex: `^[${range}]`, $options: "i" } })
+      .find({
+        "@language": language,
+        "@label": { $regex: `^[${range}]`, $options: "i" }
+      })
       .collation({ locale: language })
-      .map(({ _id, entry }) => ({ _id, entry }))
+      .map(({ _id, "@label": label }) => ({ _id, "@label": label }))
       .sort({ entry: 1 })
       .toArray();
   },
@@ -58,7 +61,7 @@ const getRandomWord = asyncWrapper(
   async (language: string) => {
     const word = await collections.word
       .aggregate([
-        { $match: { language } },
+        { $match: { "@language": language } },
         { $sample: { size: 1 } }
       ])
       .next() as WithId<Word> | null;

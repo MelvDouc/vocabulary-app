@@ -50,7 +50,8 @@ wordRouter.get("/@/:id", async (ctx) => {
 });
 
 wordRouter.put("/@/:id", requireAuth, async (ctx) => {
-  const [word, error] = await wordModel.getWord(ctx.req.param("id"));
+  const id = ctx.req.param("id") as string;
+  const [word, error] = await wordModel.getWord(id);
 
   if (!word)
     return ctx.json([null, error]);
@@ -62,7 +63,7 @@ wordRouter.put("/@/:id", requireAuth, async (ctx) => {
 });
 
 wordRouter.delete("/@/:id", requireAuth, async (ctx) => {
-  const id = ctx.req.param("id");
+  const id = ctx.req.param("id") as string;
   const apiResponse = await wordModel.deleteWord(id);
   return ctx.json(apiResponse);
 });

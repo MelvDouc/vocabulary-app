@@ -5,11 +5,11 @@ import { MongoClient } from "mongodb";
 const client = await new MongoClient(process.env.DB_URI).connect();
 console.log(chalk.yellow("Connected to database."));
 
-const db = client.db("main");
+const db = client.db("voc");
 
 const collections = {
-  word: db.collection<Word>("word"),
-  user: db.collection<User>("user")
+  word: db.collection<Word>("words"),
+  user: db.collection<User>("users")
 } as const;
 
 export {
