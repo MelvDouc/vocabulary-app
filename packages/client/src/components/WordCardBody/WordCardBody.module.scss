@@ -1,0 +1,13 @@
+.WordCardBodyList {
+  margin-inline-start: 1em;
+  list-style-position: outside !important;
+  list-style-type: square;
+}
+
+.WordCardBodyDict {
+  list-style: none;
+
+  >li>.WordCardBodyDict>li {
+    margin-inline-start: 1em;
+  }
+}

@@ -16,13 +16,12 @@ export default async function WordPage({ id }: {
   if (word === null)
     pageNotFound(error);
 
-
-  const language = word["@language"];
+  const language = word.language;
   languageObs.value = language;
   const user = await getUser();
 
   return (
-    <Page title={word["@label"]}>
+    <Page title={word.label}>
       <WordCard word={word} />
       {user && (
         <WordControls id={id} backPath={routes.Words(language)} />

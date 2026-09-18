@@ -1,11 +1,11 @@
-import WordCardBody from "$client/components/WordCard/WordCardBody.js";
+import WordCardBody from "$client/components/WordCardBody/WordCardBody.js";
 import type { Word } from "$client/types.js";
 import routes from "$client/utils/routes.js";
 import { Link } from "reactfree-jsx/extra/router";
 import cssClasses from "./WordCard.module.scss";
 
 export default function WordCard({
-  word: { _id, "@label": label, "@language": language, "@class": wordClass, ...word }
+  word: { _id, label, language, word_class: wordClass, ...word }
 }: Params) {
   return (
     <div className={cssClasses.WordCard}>

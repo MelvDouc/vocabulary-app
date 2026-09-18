@@ -30,8 +30,8 @@ export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
         <Button
           type="button"
           colorType="secondary"
-          on:click={() => emitTextInsert('[[meaning]]\ndef = ""\n')}
-        >meanings</Button>
+          on:click={() => emitTextInsert('[meaning]\ndef = ""\n')}
+        >meaning</Button>
         <Button
           type="button"
           colorType="secondary"
@@ -47,6 +47,6 @@ export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
 }
 
 const DEFAULT_TEXT =
-  '"@label" = ""\n'
-  + '"@language" = "en"\n'
-  + '"@class" = "n"\n';
+  '"label" = ""\n'
+  + '"language" = "en"\n'
+  + '"word_class" = "n"\n';

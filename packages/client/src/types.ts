@@ -12,7 +12,7 @@ export type JsonValue =
   | { [key: string]: JsonValue; };
 
 export type Word = _Word & { _id: string; };
-export type WordLinkParams = Pick<Word, "_id" | "@label">;
+export type WordLinkParams = Pick<Word, "_id" | "label">;
 
 export interface User {
   email: string;

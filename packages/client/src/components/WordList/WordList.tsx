@@ -10,7 +10,7 @@ export default function WordList({ words }: {
 
   return (
     <ul className={cssClasses.WordList}>
-      {words.map(({ _id, "@label": label }) => (
+      {words.map(({ _id, label }) => (
         <li>
           <Link href={routes.Word(_id)}>{label}</Link>
         </li>

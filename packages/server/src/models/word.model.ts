@@ -5,29 +5,28 @@ import { ObjectId, type WithId } from "mongodb";
 import { z } from "zod";
 
 const WordSchema = z.object({
-  "@label": z
+  label: z
     .string({ error: "Entry required." })
     .min(1, "Entry required."),
-  "@language": z
+  language: z
     .string({ error: "Language required" })
     .min(1, "Language required."),
-  "@class": z
+  word_class: z
     .string({ error: "Word class required." })
     .min(1, "Word class required.")
 });
 
 const getLanguages = asyncWrapper(
-  () => collections.word.distinct("@language"),
+  () => collections.word.distinct("language"),
   () => "Language list is unavailable."
 );
 
 const getWords = asyncWrapper(
   (language: string) => {
     return collections.word
-      .find({ "@language": language })
+      .find({ language })
       .collation({ locale: language })
-      .map(({ _id, "@label": label }) => ({ _id, "@label": label }))
-      .sort({ entry: 1 })
+      .sort({ label: 1 })
       .toArray();
   },
   () => "Word list is unavailable."
@@ -37,12 +36,11 @@ const getWordsBetween = asyncWrapper(
   (language: string, range: LetterRange) => {
     return collections.word
       .find({
-        "@language": language,
-        "@label": { $regex: `^[${range}]`, $options: "i" }
+        language,
+        label: { $regex: `^[${range}]`, $options: "i" }
       })
       .collation({ locale: language })
-      .map(({ _id, "@label": label }) => ({ _id, "@label": label }))
-      .sort({ entry: 1 })
+      .sort({ label: 1 })
       .toArray();
   },
   () => "Word list is unavailable."
@@ -61,7 +59,7 @@ const getRandomWord = asyncWrapper(
   async (language: string) => {
     const word = await collections.word
       .aggregate([
-        { $match: { "@language": language } },
+        { $match: { language } },
         { $sample: { size: 1 } }
       ])
       .next() as WithId<Word> | null;
