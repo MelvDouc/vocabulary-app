@@ -2,6 +2,25 @@ const SPACE = " ";
 const PSEUDO_TAB = SPACE + SPACE;
 const LINEFEED = "\n";
 
+export function insertText(textarea: HTMLTextAreaElement, text: string): void {
+  const { selectionStart, selectionEnd, value } = textarea;
+  const textBefore = value.slice(0, selectionStart);
+  const textAfter = value.slice(selectionEnd);
+
+  textarea.value = textBefore + text + textAfter;
+  textarea.setSelectionRange(selectionStart + text.length, selectionStart + text.length);
+}
+
+export function surround(textarea: HTMLTextAreaElement, openingChar: string, closingChar: string): void {
+  const { selectionStart, selectionEnd, value: text } = textarea;
+  const textBefore = text.slice(0, selectionStart);
+  const selectedText = text.slice(selectionStart, selectionEnd);
+  const textAfter = text.slice(selectionEnd);
+
+  textarea.value = textBefore + openingChar + selectedText + closingChar + textAfter;
+  textarea.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+}
+
 export function tabLeft(textarea: HTMLTextAreaElement): void {
   const { selectionStart, selectionEnd, value: text } = textarea;
   const { row: startRow } = indexToPoint(text, selectionStart);
@@ -109,10 +128,7 @@ function pointToIndex(str: string, point: Point): number {
   let col = 0;
   let index = 0;
 
-  while (index < str.length) {
-    if (row === point.row && col === point.col)
-      break;
-
+  while (index < str.length && (row !== point.row || col !== point.col)) {
     if (str[index++] !== LINEFEED) {
       col++;
       continue;

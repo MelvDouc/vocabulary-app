@@ -1,8 +1,10 @@
 import {
-  tabLeft,
-  tabRight,
+  insertText,
+  moveLinesDown,
   moveLinesUp,
-  moveLinesDown
+  surround,
+  tabLeft,
+  tabRight
 } from "$client/components/WordFormTextArea/event-handlers.js";
 
 export default function WordFormTextarea({ name, text, onTextInsert }: {
@@ -19,14 +21,7 @@ export default function WordFormTextarea({ name, text, onTextInsert }: {
       on:keydown={handleKeyDown}
       value={text}
       $init={(element) => {
-        onTextInsert((text) => {
-          const { selectionStart, selectionEnd, value } = element;
-          const textBefore = value.slice(0, selectionStart);
-          const textAfter = value.slice(selectionEnd);
-
-          element.value = textBefore + text + textAfter;
-          element.setSelectionRange(selectionStart + text.length, selectionStart + text.length);
-        });
+        onTextInsert((text) => insertText(element, text));
       }}
     ></textarea>
   );
@@ -49,6 +44,21 @@ function handleKeyDown(e: KeyboardEvent) {
     case "ArrowDown": {
       if (e.altKey)
         moveLinesDown(textarea);
+      break;
+    }
+    case "(": {
+      e.preventDefault();
+      surround(textarea, "(", ")");
+      break;
+    }
+    case "[": {
+      e.preventDefault();
+      surround(textarea, "[", "]");
+      break;
+    }
+    case "\"": {
+      e.preventDefault();
+      surround(textarea, "\"", "\"");
       break;
     }
   }
