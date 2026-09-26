@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const cookieName = "auth_token";
 
 async function checkCredentials(email: string, plainPassword: string): Promise<boolean> {
-  const user = await collections.user.findOne({ email });
+  const user = await collections.users.findOne({ email });
   return user !== null && bcrypt.compare(plainPassword, user.password);
 }
 

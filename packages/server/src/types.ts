@@ -1,5 +1,3 @@
-import type { Word } from "common";
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -14,14 +12,6 @@ declare global {
 export type Result<Data, Err = unknown> = [Data, null] | [null, Err];
 export type AsyncResult<Data, Err = unknown> = Promise<Result<Data, Err>>;
 
-export type JsonValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JsonValue[]
-  | { [key: string]: JsonValue; };
-
 export type User = {
   email: string;
   password: string;
@@ -34,4 +24,4 @@ export interface HttpBindingsEnv {
   Bindings: import("@hono/node-server").HttpBindings;
 }
 
-export type { Word };
+export type { Word } from "common";

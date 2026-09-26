@@ -8,8 +8,8 @@ console.log(chalk.yellow("Connected to database."));
 const db = client.db("voc");
 
 const collections = {
-  word: db.collection<Word>("words"),
-  user: db.collection<User>("users")
+  words: db.collection<Word>("words"),
+  users: db.collection<User>("users")
 } as const;
 
 export {

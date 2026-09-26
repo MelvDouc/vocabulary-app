@@ -47,6 +47,6 @@ export default function WordForm({ handleSubmit, data = DEFAULT_TEXT }: {
 }
 
 const DEFAULT_TEXT =
-  '"label" = ""\n'
-  + '"language" = "en"\n'
-  + '"word_class" = "n"\n';
+  'label = ""\n'
+  + 'language = "en"\n'
+  + 'word_class = "n"\n';

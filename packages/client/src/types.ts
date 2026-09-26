@@ -1,4 +1,4 @@
-import type { Word as _Word } from "common";
+import type { Word as CommonWord } from "common";
 
 export type Result<Data, Err = unknown> = [Data, null] | [null, Err];
 export type AsyncResult<Data, Err = unknown> = Promise<Result<Data, Err>>;
@@ -11,7 +11,7 @@ export type JsonValue =
   | JsonValue[]
   | { [key: string]: JsonValue; };
 
-export type Word = _Word & { _id: string; };
+export type Word = CommonWord & { _id: string; };
 export type WordLinkParams = Pick<Word, "_id" | "label">;
 
 export interface User {

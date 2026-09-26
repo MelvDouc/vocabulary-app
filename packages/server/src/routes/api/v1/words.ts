@@ -1,6 +1,6 @@
 import { requireAuth } from "$server/middleware/auth.middleware.js";
 import wordModel from "$server/models/word.model.js";
-import type { JsonValue } from "$server/types.js";
+import type { Word } from "$server/types.js";
 import { Hono as Router } from "hono";
 import TOML from "smol-toml";
 
@@ -72,9 +72,9 @@ function isLetter(str: string): boolean {
   return /^[a-z]$/i.test(str);
 }
 
-function safeParseToml(text: string): JsonValue {
+function safeParseToml(text: string): Word | null {
   try {
-    return TOML.parse(text) as JsonValue;
+    return TOML.parse(text) as Word;
   } catch {
     return null;
   }

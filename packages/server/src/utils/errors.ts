@@ -16,7 +16,7 @@ export function asyncWrapper<Args extends unknown[], Data, Err>(
 }
 
 export function flattenErrors(zodError: ZodError): string[] {
-  return zodError.errors.map((e) => e.message);
+  return zodError.issues.map((value) => value.message);
 }
 
 export function getErrorMessages(arg: unknown): string[] {

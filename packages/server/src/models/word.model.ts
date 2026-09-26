@@ -1,6 +1,7 @@
 import { collections } from "$server/core/database.js";
 import type { Word } from "$server/types.ts";
 import { asyncWrapper, getErrorMessages } from "$server/utils/errors.js";
+import { WordClasses } from "common";
 import { ObjectId, type WithId } from "mongodb";
 import { z } from "zod";
 
@@ -11,19 +12,19 @@ const WordSchema = z.object({
   language: z
     .string({ error: "Language required" })
     .min(1, "Language required."),
-  word_class: z
-    .string({ error: "Word class required." })
-    .min(1, "Word class required.")
+  word_class: z.enum(WordClasses, {
+    error: `Invalid word class; must be in: ${WordClasses.join(" | ")}.`
+  })
 });
 
 const getLanguages = asyncWrapper(
-  () => collections.word.distinct("language"),
+  () => collections.words.distinct("language"),
   () => "Language list is unavailable."
 );
 
 const getWords = asyncWrapper(
   (language: string) => {
-    return collections.word
+    return collections.words
       .find({ language })
       .collation({ locale: language })
       .sort({ label: 1 })
@@ -34,7 +35,7 @@ const getWords = asyncWrapper(
 
 const getWordsBetween = asyncWrapper(
   (language: string, range: LetterRange) => {
-    return collections.word
+    return collections.words
       .find({
         language,
         label: { $regex: `^[${range}]`, $options: "i" }
@@ -48,7 +49,7 @@ const getWordsBetween = asyncWrapper(
 
 const getWord = asyncWrapper(
   async (id: string) => {
-    const word = await collections.word.findOne({ _id: new ObjectId(id) });
+    const word = await collections.words.findOne({ _id: new ObjectId(id) });
     if (!word) throw new Error();
     return word;
   },
@@ -57,7 +58,7 @@ const getWord = asyncWrapper(
 
 const getRandomWord = asyncWrapper(
   async (language: string) => {
-    const word = await collections.word
+    const word = await collections.words
       .aggregate([
         { $match: { language } },
         { $sample: { size: 1 } }
@@ -69,13 +70,13 @@ const getRandomWord = asyncWrapper(
 
     return word;
   },
-  () => "Word not found."
+  () => "Could not get a random word."
 );
 
 const addWord = asyncWrapper<[unknown], WithId<Word>, string[]>(
   async (data) => {
-    WordSchema.parse(data) as Word;
-    const result = await collections.word.insertOne(data as Word);
+    WordSchema.parse(data);
+    const result = await collections.words.insertOne(data as Word);
     return {
       ...(data as Word),
       _id: result.insertedId
@@ -87,7 +88,7 @@ const addWord = asyncWrapper<[unknown], WithId<Word>, string[]>(
 const replaceWord = asyncWrapper<[ObjectId, unknown], true, string[]>(
   async (_id, data) => {
     WordSchema.parse(data);
-    await collections.word.replaceOne({ _id }, data as Word);
+    await collections.words.replaceOne({ _id }, data as Word);
     return true;
   },
   getErrorMessages
@@ -95,7 +96,7 @@ const replaceWord = asyncWrapper<[ObjectId, unknown], true, string[]>(
 
 const deleteWord = asyncWrapper<[string], true, string>(
   async (id) => {
-    await collections.word.deleteOne({ _id: new ObjectId(id) });
+    await collections.words.deleteOne({ _id: new ObjectId(id) });
     return true;
   },
   () => "Word could not be deleted."
